@@ -1,4 +1,4 @@
-from pydantic import AliasChoices, Field
+from pydantic import AliasChoices, Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -19,6 +19,15 @@ class Settings(BaseSettings):
         default=24,
         validation_alias=AliasChoices("JWT_EXPIRY_HOURS", "jwt_expiry_hours"),
     )
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def validate_database_url(cls, value):
+        if value is None:
+            return "postgresql://postgres:root@localhost:5432/project_mgmt"
+        if isinstance(value, str) and not value.strip():
+            return "postgresql://postgres:root@localhost:5432/project_mgmt"
+        return value
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
