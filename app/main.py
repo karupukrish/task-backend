@@ -18,8 +18,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173", settings.FRONTEND_URL],
-    # allow_origins=["http://localhost:3000", "http://localhost:5173", settings.frontend_url],
+    allow_origins=["http://localhost:3000", "http://localhost:5173", settings.frontend_url],
+    # allow_origins=["http://localhost:3000", "http://localhost:5173", "https://task-frontend-rho-three.vercel.app/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
