@@ -19,6 +19,10 @@ class Settings(BaseSettings):
         default=24,
         validation_alias=AliasChoices("JWT_EXPIRY_HOURS", "jwt_expiry_hours"),
     )
+    frontend_url: str = Field(
+        default="http://localhost:3000",
+        validation_alias=AliasChoices("FRONTEND_URL", "frontend_url"),
+    )
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
